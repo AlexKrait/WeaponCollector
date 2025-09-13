@@ -9,7 +9,6 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] Rigidbody2D _rb;
     
 
-
     void Start()
     {
         
