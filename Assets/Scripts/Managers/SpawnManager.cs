@@ -4,7 +4,7 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] float _timer = 0f;
     [SerializeField] float _spawnInterval = 2f;
-    [SerializeField] float _spawnHeight = 7f;
+    [SerializeField] float _spawnHeight = 6f;
     [SerializeField] GameObject _boxPrefab;
     [SerializeField] Rigidbody2D _rb;
     
