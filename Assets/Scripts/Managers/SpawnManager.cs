@@ -1,31 +1,34 @@
 using UnityEngine;
+using System.Collections;
 
 public class SpawnManager : MonoBehaviour
 {
-    [SerializeField] float _timer = 0f;
+    [SerializeField] GameObject _boxPrefab;
     [SerializeField] float _spawnInterval = 2f;
     [SerializeField] float _spawnHeight = 6f;
-    [SerializeField] GameObject _boxPrefab;
-    [SerializeField] Rigidbody2D _rb;
-    
+    [SerializeField] float _spawnXRange = 7f;
 
     void Start()
     {
-        
+        StartCoroutine(SpawnBoxes());
     }
 
-
-    void Update()
+    IEnumerator SpawnBoxes()
     {
-        _timer += Time.deltaTime;
-        _rb.gravityScale = 0.05f;
-        
-        if (_timer > _spawnInterval)
+        while (true)
         {
-            _timer = 0f;
-            float randomPositionX = Random.Range(-7f, 7f);
-            Vector3 spawnPosition = new Vector3(randomPositionX, _spawnHeight, 0f);
-            GameObject box = Instantiate(_boxPrefab, spawnPosition, Quaternion.identity); 
+            float randomX = Random.Range(-_spawnXRange, _spawnXRange);
+            Vector3 spawnPos = new Vector3(randomX, _spawnHeight, 0f);
+            GameObject box = Instantiate(_boxPrefab, spawnPos, Quaternion.identity);
+
+            // ”станавливаем гравитацию дл€ каждого €щика
+            Rigidbody2D rb = box.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.gravityScale = 0.05f;
+            }
+
+            yield return new WaitForSeconds(_spawnInterval);
         }
     }
 }
