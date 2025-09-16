@@ -3,18 +3,18 @@ using UnityEngine.UI;
 
 public class Crystal : MonoBehaviour
 {
-    [SerializeField] Image _image;
+    [SerializeField] private Image _image;
 
     public enum CrystalType { Fire, Water, Poison, Earth, Air } 
 
     public CrystalType Type { get; private set; }
 
     [Header("Спрайты кристаллов")]
-    [SerializeField] Sprite _fireSprite;
-    [SerializeField] Sprite _waterSprite;
-    [SerializeField] Sprite _poisonSprite;
-    [SerializeField] Sprite _earthSprite;
-    [SerializeField] Sprite _airSprite; 
+    [SerializeField] private Sprite _fireSprite;
+    [SerializeField] private Sprite _waterSprite;
+    [SerializeField] private Sprite _poisonSprite;
+    [SerializeField] private Sprite _earthSprite;
+    [SerializeField] private Sprite _airSprite; 
 
     public void SetRandomColor()
     {

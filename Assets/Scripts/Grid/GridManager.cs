@@ -4,12 +4,13 @@ using UnityEngine.UI;
 public class GridManager : MonoBehaviour
 {
     [Header("Настройки")]
-    [SerializeField] GameObject _crystalPrefab;
-    [SerializeField] Transform _gridParent;
-    [SerializeField] Button _generateCrystalButton;
+    [SerializeField] private GameObject _crystalPrefab;
+    [SerializeField] private Transform _gridParent;
+    [SerializeField] private Button _generateCrystalButton;
+    [SerializeField] private AudioManager _audioManager;
 
     [Header("Размер сетки")]
-    [SerializeField] int _gridSize = 6;
+    [SerializeField] private int _gridSize = 6;
 
     private void Start()
     {
@@ -18,18 +19,19 @@ public class GridManager : MonoBehaviour
 
     public void GenerateGrid()
     {
+        _audioManager.PlayCrystalSpawn();
         foreach (Transform child in _gridParent)
         {
             Destroy(child.gameObject);
         }
 
-        var layot = _gridParent.GetComponent<GridLayoutGroup>();
-        layot.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
-        layot.constraintCount = _gridSize;
+        var gridLayout = _gridParent.GetComponent<GridLayoutGroup>();
+        gridLayout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+        gridLayout.constraintCount = _gridSize;
 
-        int total = _gridSize * _gridSize;
+        int totalGridSize = _gridSize * _gridSize;
 
-        for (int i = 0; i < total; i++)
+        for (int i = 0; i < totalGridSize; i++)
         {
             GameObject crystal = Instantiate(_crystalPrefab, _gridParent);
             crystal.GetComponent<Crystal>().SetRandomColor();
