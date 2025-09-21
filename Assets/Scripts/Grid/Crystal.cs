@@ -5,8 +5,7 @@ public class Crystal : MonoBehaviour
 {
     [SerializeField] private Image _image;
 
-    public enum CrystalType { Fire, Water, Poison, Earth, Air } 
-
+    public enum CrystalType { Fire, Water, Poison, Earth, Air }
     public CrystalType Type { get; private set; }
 
     [Header("Спрайты кристаллов")]
@@ -14,7 +13,7 @@ public class Crystal : MonoBehaviour
     [SerializeField] private Sprite _waterSprite;
     [SerializeField] private Sprite _poisonSprite;
     [SerializeField] private Sprite _earthSprite;
-    [SerializeField] private Sprite _airSprite; 
+    [SerializeField] private Sprite _airSprite;
 
     public void SetRandomColor()
     {
@@ -28,7 +27,12 @@ public class Crystal : MonoBehaviour
             case CrystalType.Poison: _image.sprite = _poisonSprite; break;
             case CrystalType.Earth: _image.sprite = _earthSprite; break;
             case CrystalType.Air: _image.sprite = _airSprite; break;
-
         }
+    }
+
+    public void RemoveCrystal()
+    {
+        // TODO: эффект / звук
+        Destroy(gameObject);
     }
 }
